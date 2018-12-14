@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <input type="file" id="fileinput" />
+  <script src="../index.js"></script>
+  <script>
+    var file = document.getElementById("fileinput");
+
+    file.addEventListener("change", function(){
+      // If you don't need to know the file's contents...
+      console.log(fileto.object(this.files[0]));
+      // ...or...
+      console.log(fileto.string(this.files[0]));
+
+      // If you need to know the file's contents...
+      fileto.promise(this.files[0]).then(function(output){
+        console.log(output);
+      });
+    }, false);
+  </script>
+</body>
+</html>

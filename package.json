@@ -1,0 +1,11 @@
+{
+  "name": "fileto",
+  "version": "0.0.1",
+  "description": "A little library to work with Javascript File objects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tony Boyles <nsp3@cdc.gov>",
+  "license": "Apache 2.0"
+}
