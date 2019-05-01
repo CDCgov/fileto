@@ -58,6 +58,21 @@ fileto.string(this.files[0]);
 /* '{"name":"test.txt","lastModified":1544812259347,"size":7,"type":"text/plain"}' */
 ```
 
+**`fileto.callback(<file>, callback, readAs)`** - Unwraps a File Object and executes a callback with its contents.
+
+```javascript
+fileto.callback(this.files[0], function(output){
+  console.log(output);
+});
+/* {
+  contents: "foobar↵"
+  lastModified: 1544812259347
+  name: "test.txt"
+  size: 7
+  type: "text/plain"
+} */
+```
+
 **`fileto.promise(<file>, readAs)`** - Returns a promise to unwrap a File object, read the file's contents, and resolve the promise with the unwrapped object. The contents will be in `response.contents`.
 
 ```javascript
@@ -72,6 +87,8 @@ fileto.promise(this.files[0]).then(function(output){
   type: "text/plain"
 } */
 ```
+
+If Promises aren't available, returns an object with a `then` function that executes a callback as though it were a promise. Note that while this works for an isolated call (like the example above), it does not enable chaining.
 
 By default, `readAs` is `Text`, but [can be set to](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) `ArrayBuffer`, `BinaryString`, `DataURL`, or `Text`.
 

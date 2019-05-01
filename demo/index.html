@@ -16,6 +16,10 @@
       fileto.promise(this.files[0]).then(function(output){
         console.log(output);
       });
+      // ...or if you don't do Promises...
+      fileto.callback(this.files[0], function(output){
+        console.log(output);
+      });
     }, false);
   </script>
 </body>
