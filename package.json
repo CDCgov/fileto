@@ -1,11 +1,14 @@
 {
   "name": "fileto",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A little library to work with Javascript File objects",
-  "main": "index.js",
+  "main": "fileto.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "terser fileto.js --compress --mangle -o fileto.min.js"
   },
   "author": "Tony Boyles <nsp3@cdc.gov>",
-  "license": "Apache 2.0"
+  "license": "Apache 2.0",
+  "devDependencies": {
+    "terser": "^3.17.0"
+  }
 }
