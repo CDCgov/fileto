@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>fileto demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/normalize.css/normalize.css" type="text/css">
+  <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css" />
+</head>
 <body>
+  <p>Open the Console and Load a file (preferably a plaintext format) to see what's going on.</p>
   <input type="file" id="fileinput" />
-  <script src="../index.js"></script>
+  <script src="../fileto.js"></script>
   <script>
     var file = document.getElementById("fileinput");
 
     file.addEventListener("change", function(){
       // If you don't need to know the file's contents...
       console.log(fileto.object(this.files[0]));
+
       // ...or...
       console.log(fileto.string(this.files[0]));
 
@@ -16,6 +23,7 @@
       fileto.promise(this.files[0]).then(function(output){
         console.log(output);
       });
+
       // ...or if you don't do Promises...
       fileto.callback(this.files[0], function(output){
         console.log(output);
