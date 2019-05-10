@@ -26,7 +26,6 @@ Suppose we load a textfile called `test.txt` into the above file input. Its cont
 
 ```text
 foobar
-
 ```
 
 To get the actual File object, we'll need to listen to the change event:
@@ -58,14 +57,14 @@ fileto.string(this.files[0]);
 /* '{"name":"test.txt","lastModified":1544812259347,"size":7,"type":"text/plain"}' */
 ```
 
-**`fileto.callback(<file>, callback, readAs)`** - Unwraps a File Object and executes a callback with its contents.
+**`fileto.callback(<file>, callback, readAs)`** - Unwraps a File Object, reads its contents, and executes a callback. The unwrapped file Object will be passed to the callback, and its contents will be in `file.contents`.
 
 ```javascript
 fileto.callback(this.files[0], function(output){
   console.log(output);
 });
 /* {
-  contents: "foobar↵"
+  contents: "foobar"
   lastModified: 1544812259347
   name: "test.txt"
   size: 7
@@ -73,14 +72,16 @@ fileto.callback(this.files[0], function(output){
 } */
 ```
 
-**`fileto.promise(<file>, readAs)`** - Returns a promise to unwrap a File object, read the file's contents, and resolve the promise with the unwrapped object. The contents will be in `response.contents`.
+By default, `readAs` is `Text`, but [can be set to](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) `ArrayBuffer`, `BinaryString`, `DataURL`, or `Text`.
+
+**`fileto.promise(<file>, readAs)`** - Returns a promise to unwrap a File Object, read the file's contents, and resolve the promise with the unwrapped Object. The contents will be in `response.contents`.
 
 ```javascript
 fileto.promise(this.files[0]).then(function(output){
   console.log(output);
 });
 /* {
-  contents: "foobar↵"
+  contents: "foobar"
   lastModified: 1544812259347
   name: "test.txt"
   size: 7
@@ -88,11 +89,9 @@ fileto.promise(this.files[0]).then(function(output){
 } */
 ```
 
-If Promises aren't available, returns an object with a `then` function that executes a callback as though it were a promise. Note that while this works for an isolated call (like the example above), it does not enable chaining.
+If Promises [aren't available](https://caniuse.com/#feat=promises), returns an object with a `then` function that executes a callback as though it were a promise, and returns an object with a catch attribute pointing to a null function. Basically, it's a hack to make this thing work under 90% of the circumstances that people use promises for. *Note that while this does not enable chaining.* If you need Promises for users of terrible browsers, [Polyfill them](https://github.com/stefanpenner/es6-promise).
 
-By default, `readAs` is `Text`, but [can be set to](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) `ArrayBuffer`, `BinaryString`, `DataURL`, or `Text`.
-
-To see all three of these in action, check out [the demo](https://github.com/CDCgov/fileto/master/demo/index.html).
+To see each of these in action, check out [the demo](https://github.com/CDCgov/fileto/master/demo/index.html).
 
 ## Public Domain
 This repository constitutes a work of the United States Government and is not
