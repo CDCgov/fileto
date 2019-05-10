@@ -1,6 +1,6 @@
 {
   "name": "fileto",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A little library to work with Javascript File objects",
   "main": "fileto.js",
   "scripts": {
