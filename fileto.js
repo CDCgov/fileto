@@ -48,6 +48,7 @@
       return {
         then: function(cb){
           fileto.callback(file, cb, readAs);
+          return {catch: function(){}};
         }
       };
     }
